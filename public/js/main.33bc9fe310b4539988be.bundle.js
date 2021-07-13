@@ -1,0 +1,1 @@
+(self.webpackChunkkakao_pay=self.webpackChunkkakao_pay||[]).push([[179],{738:()=>{"use strict";var e=document.createElement("h1");e.textContent="카카오 타이핑 게임에 오신 것을 진심으로 환영합니다.",document.querySelector("#root").append(e)}},e=>{"use strict";e(e.s=738)}]);
