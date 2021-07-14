@@ -1,33 +1,22 @@
-// const homeTemplate = require('./pages/home.hbs')
-const gameStartTemplate = require('./pages/gameStart.hbs')
-const gameCompleteTemplate = require('./pages/gameComplete.hbs')
+const Router = {
+  parseRequestURL: () => {
+    let url = window.location.hash.slice(1).toLowerCase() || '/'
+    let r = url.split('/')
+    let request = {
+      resource: null,
+      id: null,
+      verb: null,
+    }
+    request.resource = r[1]
+    request.id = r[2]
+    request.verb = r[3]
 
-// const Home = homeTemplate()
-const Start = gameStartTemplate()
-const Complete = gameCompleteTemplate()
+    return request
+  },
 
-const routes = {
-  '/start': Start,
-  '/complete': Complete,
+  sleep: (ms) => {
+    return new Promise((resolve) => window.setTimeout(resolve, ms))
+  },
 }
 
-const initialRoutes = (element) => {
-  renderHTML(element, routes['/'])
-
-  window.onpopstate = () =>
-    renderHTML(element, routes[window.location.pathname])
-}
-
-const historyRouterPush = (pathName, element) => {
-  window.history.pushState({}, pathName, window.location.origin + pathName)
-  renderHTML(element, routes[pathName])
-}
-
-const renderHTML = (element, route) => {
-  element.innerHTML = route
-}
-
-module.exports = {
-  initialRoutes,
-  historyRouterPush,
-}
+export default Router
