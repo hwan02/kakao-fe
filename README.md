@@ -7,3 +7,4 @@
 4. 주어진 시간 내에 정답을 맞추지 못하면 다음 단어를 출력한다. 
 5. 주어진 단어가 모두 사라질 때까지 반복한다. 
 "# 202107-seunghwansuh-kakao.com" 
+"# 202107-seunghwansuh-kakao.com" 
