@@ -1,23 +1,29 @@
-import { head } from './js/head'
-import '@/styles/main.scss'
-// import { handleHome } from './js/home'
-const { handleStart } = require('./js/start')
-// import { handleComplete } from './pages/gameComplete'
+import Start from './js/start.js'
+import Complete from './js/complete.js'
+import Error404 from './js/error404.js'
 
-const { initialRoutes, historyRouterPush } = require('./router')
+import Router from './router.js'
 
-const root = document.querySelector('#root')
+const routes = {
+  '/': Start,
+  '/complete': Complete,
+}
 
-// initialRoutes(root)
+const router = async () => {
+  const content = document.getElementById('page_container')
 
-const heading = document.createElement('h1')
-heading.textContent = head()
+  let request = Router.parseRequestURL()
 
-const button = document.createElement('button')
-button.appendChild(document.createTextNode('게임시작 화면으로 이동'))
-button.addEventListener('click', () => {
-  historyRouterPush('/start', root)
-  handleStart()
-})
-root.append(heading)
-root.append(button)
+  let parsedURL =
+    (request.resource ? '/' + request.resource : '/') +
+    (request.id ? '/:id' : '') +
+    (request.verb ? '/' + request.verb : '')
+
+  let page = routes[parsedURL] ? routes[parsedURL] : Error404
+  content.innerHTML = await page.render()
+  await page.after_render()
+}
+
+window.addEventListener('hashchange', router)
+
+window.addEventListener('load', router)

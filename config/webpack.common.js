@@ -13,9 +13,7 @@ module.exports = {
     publicPath: '/',
   },
 
-  // Customize the webpack build process
   plugins: [
-    // Removes/cleans build folders and unused assets when rebuilding
     new CleanWebpackPlugin(),
 
     new HtmlWebpackPlugin({
@@ -24,21 +22,29 @@ module.exports = {
       filename: 'index.html',
     }),
 
-    // ESLint configuration
     new ESLintPlugin({
       files: ['.', 'src', 'config'],
       formatter: 'table',
     }),
 
-    // Prettier configuration
     new PrettierPlugin(),
   ],
 
-  // Determine how modules within the project are treated
   module: {
     rules: [
-      { test: /\.js$/, use: ['babel-loader'] },
-
+      {
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              '@babel/preset-env'
+            ],
+            "plugins": ["@babel/plugin-transform-runtime"]
+          }
+        }
+      },
       { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' },
     ],
   },
@@ -46,8 +52,5 @@ module.exports = {
   resolve: {
     modules: [paths.src, 'node_modules'],
     extensions: ['.js', '.jsx', '.json'],
-    alias: {
-      '@': paths.src,
-    },
   },
 }

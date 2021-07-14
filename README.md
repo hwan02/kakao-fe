@@ -1,4 +1,4 @@
-# kakao-fe 
+# kakao-pay
 
 ###Typing Game Algorithm 
 1. Fetch로 서버에 단어를 요청한다. 
