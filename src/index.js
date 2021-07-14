@@ -8,7 +8,7 @@ const { initialRoutes, historyRouterPush } = require('./router')
 
 const root = document.querySelector('#root')
 
-initialRoutes(root)
+// initialRoutes(root)
 
 const heading = document.createElement('h1')
 heading.textContent = head()

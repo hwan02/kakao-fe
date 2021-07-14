@@ -7,7 +7,6 @@ const Start = gameStartTemplate()
 const Complete = gameCompleteTemplate()
 
 const routes = {
-  // '/': Home,
   '/start': Start,
   '/complete': Complete,
 }
